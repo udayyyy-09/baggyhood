@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; scroll-behavior: smooth; }
+html { scroll-padding-top: 82px; }
+body { margin: 0; background: #0b0d0c; }
+::selection { background: #a9ad87; color: #0b0d0c; }
+.nav-link { transition: color .2s ease; }
+.nav-link:hover { color: #c6c9aa; }
+.hero-image {
+  background-image: url('https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=2200&q=90');
+  background-position: center 38%;
+  background-size: cover;
+  filter: saturate(.68);
+}
+.fabric-image {
+  background-image: url('https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1400&q=90');
+  background-position: center;
+  background-size: cover;
+}
+.waitlist-image {
+  background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1800&q=80');
+  background-position: center 44%;
+  background-size: cover;
+  filter: grayscale(.5);
+}
+.eyebrow { color: #a9ad87; font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.eyebrow-dark { color: #656a4d; font-size: 10px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; }
+.section-title { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: clamp(2.5rem, 5vw, 4.4rem); font-weight: 900; line-height: .98; letter-spacing: -.06em; }
+.section-title-dark { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: clamp(2.5rem, 5vw, 4.25rem); font-weight: 900; line-height: .98; letter-spacing: -.06em; }
+.shade-card { border: 1px solid transparent; padding: 8px; transition: border-color .25s ease, transform .25s ease; }
+.shade-card:hover { transform: translateY(-3px); }
+.shade-selected { border-color: #777b59; }
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.glow-drip {
+  box-shadow: 0 0 50px -10px rgba(169, 173, 135, 0.18);
+}
+
+@media (max-width: 640px) {
+  .hero { min-height: 760px; }
+  .hero-image { background-position: 58% center; }
+}
+

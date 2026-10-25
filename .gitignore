@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Environment Variables & Secrets (CRITICAL)
+.env
+.env.*
+backend/.env
+backend/.env.*
+!.env.example
+!backend/.env.example
+
+# Customer Droplist Data (Private)
+backend/data/*.json
+backend/data/*.csv
+
+# Build output
+dist/
+dist-ssr/
+
+# macOS system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

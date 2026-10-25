@@ -217,7 +217,7 @@ function App() {
         const parsed = JSON.parse(data)
         if (parsed.size) return parsed.size
       }
-    } catch {}
+    } catch { }
     return '32 (44″ Length)'
   })
 
@@ -256,7 +256,10 @@ function App() {
     }
 
     try {
-      const response = await fetch('/api/droplist', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || ''
+      const apiUrl = `${apiBase.replace(/\/$/, '')}/api/droplist`
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -501,7 +504,7 @@ function App() {
               <p className="eyebrow">03 — Fit & size</p>
               <h2 className="section-title mt-4">ROOM TO MOVE.<br /><span className="text-[#a9ad87]">FIT THAT MAKES SENSE.</span></h2>
               <p className="mt-5 max-w-md text-sm leading-7 text-white/60">The right oversized fit shouldn't mean guessing your size. We provide complete measurements including waist and total jeans length for the ideal stacked silhouette.</p>
-              
+
               <div className="mt-6 flex flex-wrap gap-3">
                 <div className="rounded-lg border border-[#a9ad87]/30 bg-[#a9ad87]/5 px-4 py-3">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-[#a9ad87]">Stack Calibrated</p>
@@ -542,11 +545,10 @@ function App() {
                     {sizeChartData.map((row) => (
                       <tr
                         key={row.name}
-                        className={`transition-colors ${
-                          row.highlight
+                        className={`transition-colors ${row.highlight
                             ? 'bg-[#a9ad87]/15 border-y border-[#a9ad87]/40'
                             : 'border-b border-white/5 hover:bg-white/[.02]'
-                        }`}
+                          }`}
                       >
                         <th className="px-5 py-4 font-medium text-white flex items-center gap-2 whitespace-nowrap">
                           <span className={row.highlight ? 'font-bold text-[#d8dcbe]' : ''}>{row.name}</span>
@@ -559,11 +561,10 @@ function App() {
                         {row.values.map((v, i) => (
                           <td
                             key={i}
-                            className={`px-4 py-4 text-center tabular-nums ${
-                              row.highlight
+                            className={`px-4 py-4 text-center tabular-nums ${row.highlight
                                 ? 'text-base font-extrabold text-[#c8cca8]'
                                 : 'text-white/75'
-                            }`}
+                              }`}
                           >
                             {v}
                           </td>
@@ -641,11 +642,10 @@ function App() {
                             key={item.w}
                             type="button"
                             onClick={() => setPreferredSize(val)}
-                            className={`flex flex-col items-center justify-center rounded-lg border py-2 text-center transition ${
-                              active
+                            className={`flex flex-col items-center justify-center rounded-lg border py-2 text-center transition ${active
                                 ? 'border-[#a9ad87] bg-[#a9ad87]/20 text-white'
                                 : 'border-white/10 bg-white/[.04] text-white/60 hover:border-white/20 hover:text-white'
-                            }`}
+                              }`}
                           >
                             <span className="text-xs font-bold leading-none">{item.w}</span>
                             <span className="mt-1 text-[9px] text-[#a9ad87] leading-none">{item.l}</span>
@@ -754,7 +754,7 @@ function App() {
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108 group-hover:brightness-110 filter saturate-[.85]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-black/20" />
-                    
+
                     {/* Floating pill tags */}
                     <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
                       {/* <span className="rounded-full bg-black/70 px-3 py-1 font-mono text-[10px] font-bold tracking-wider text-white backdrop-blur-md border border-white/15">
@@ -938,11 +938,10 @@ function App() {
                   <button
                     key={ang.id}
                     onClick={() => setActiveLightbox((prev) => ({ ...prev, angleIndex: i }))}
-                    className={`relative h-12 w-12 overflow-hidden rounded-lg border-2 transition ${
-                      activeLightbox.angleIndex === i
+                    className={`relative h-12 w-12 overflow-hidden rounded-lg border-2 transition ${activeLightbox.angleIndex === i
                         ? 'border-[#a9ad87] ring-1 ring-[#a9ad87]'
                         : 'border-white/20 opacity-60 hover:opacity-100'
-                    }`}
+                      }`}
                   >
                     <img
                       src={ang.image}

@@ -17,14 +17,21 @@ app.use(cors({
 }))
 app.use(express.json())
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
+// Health check endpoints (supports /health, /api/health, and /)
+const healthCheckHandler = (req, res) => {
   res.status(200).json({
     status: 'ok',
     service: 'baggyHood Droplist Backend',
-    time: new Date().toISOString(),
+    uptime: `${Math.floor(process.uptime())}s`,
+    timestamp: new Date().toISOString(),
+    primaryEmailConfigured: Boolean(process.env.SMTP_USER),
+    fallbackBrevoConfigured: Boolean(process.env.BREVO_API_KEY),
   })
-})
+}
+
+app.get('/health', healthCheckHandler)
+app.get('/api/health', healthCheckHandler)
+app.get('/', healthCheckHandler)
 
 // Droplist submission endpoint
 app.post('/api/droplist', handleJoinDroplist)

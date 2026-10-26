@@ -161,7 +161,7 @@ const upcomingDrips = [
     desc: 'Double-knee reinforcement, authentic hammer loop, and an extra stacked 44″–46″ drape for heavy sneaker stacking.',
     status: 'In Patterning',
     badge: 'Dropping Q1',
-    image: 'https://images.unsplash.com/photo-1551803091-e20673f15770?auto=format&fit=crop&w=900&q=85',
+    image: '/upcoming-drip.jpeg',
   },
   {
     // tag: 'DROP #04 // VAULT',

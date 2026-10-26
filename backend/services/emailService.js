@@ -16,11 +16,50 @@ function extractEmail(str) {
  * Tier 2: Brevo HTTP REST API (Render-safe port 443)
  */
 /**
- * Send email via Brevo REST API (over HTTPS port 443 — guaranteed to work on cloud hosts like Render)
+ * 1. Send email via Resend REST API (over HTTPS port 443 — highest inbox deliverability)
+ * Docs: https://resend.com/docs/api-reference/emails/send-email
  */
+async function sendViaResend({ to, subject, html, purpose }) {
+  if (!process.env.RESEND_API_KEY) return null
+
+  // Defaults to Resend's pre-verified test sender, or custom domain if set (e.g. 'baggyHood <vip@baggyhood.com>')
+  const resendFrom = process.env.RESEND_FROM_EMAIL || 'baggyHood <onboarding@resend.dev>'
+  const replyTo = process.env.BREVO_SENDER_EMAIL || process.env.SMTP_USER || 'baggyhoodindia@gmail.com'
+
+  try {
+    console.log(`[Email] Attempting ${purpose} via Resend HTTP API (from: ${resendFrom})...`)
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY.trim()}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: resendFrom,
+        to: [to],
+        reply_to: extractEmail(replyTo),
+        subject,
+        html,
+      }),
+    })
+
+    const resJson = await response.json().catch(() => ({}))
+
+    if (!response.ok) {
+      throw new Error(`Resend API ${response.status}: ${JSON.stringify(resJson)}`)
+    }
+
+    console.log(`🚀 [Email] ${purpose} delivered via Resend HTTP API to ${to} (ID: ${resJson.id})`)
+    return { success: true, provider: 'resend', id: resJson.id }
+  } catch (err) {
+    console.warn(`⚠️ [Email] Resend attempt failed for ${purpose}: ${err.message}`)
+    return null
+  }
+}
+
 /**
- * Send email via Brevo REST API (over HTTPS port 443 — guaranteed to work on cloud hosts like Render)
- * Note: Brevo STRICTLY requires the sender email to be an active verified sender in your Brevo account.
+ * 2. Send email via Brevo REST API (over HTTPS port 443 — guaranteed to work on cloud hosts like Render)
+ * Note: Brevo requires the sender email to be an active verified sender in your Brevo account.
  */
 async function sendViaBrevo({ to, subject, html, purpose }) {
   if (!process.env.BREVO_API_KEY) return null
@@ -72,7 +111,7 @@ async function sendViaBrevo({ to, subject, html, purpose }) {
 }
 
 /**
- * Send email via Primary Nodemailer SMTP (works locally, but ports 465/587 are blocked on Render free tier)
+ * 3. Send email via Primary Nodemailer SMTP (works locally, but ports 465/587 are blocked on Render free tier)
  */
 async function sendViaSmtp({ to, subject, html, purpose }) {
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS) return null
@@ -109,29 +148,28 @@ async function sendViaSmtp({ to, subject, html, purpose }) {
 }
 
 /**
- * Dispatch an email with intelligent multi-tier failover:
- * - On Render / Cloud: Prioritizes Brevo HTTP API (Port 443) for instant 300ms delivery without SMTP block timeouts
- * - Local / Self-hosted: Prioritizes SMTP with Brevo fallback
+ * Dispatch an email with multi-provider architecture:
+ * Tier 1: Resend HTTP API (if RESEND_API_KEY is present — top inbox deliverability)
+ * Tier 2: Brevo HTTP API (if BREVO_API_KEY is present — Render cloud safe fallback)
+ * Tier 3: Nodemailer Primary SMTP (for local dev or SMTP allowed hosts)
  */
 async function dispatchEmail({ to, subject, html, purpose }) {
-  const isCloudHost = Boolean(process.env.RENDER) || process.env.EMAIL_PROVIDER === 'brevo'
+  // 1. Resend (Top priority if RESEND_API_KEY is configured)
+  if (process.env.RESEND_API_KEY) {
+    const resendRes = await sendViaResend({ to, subject, html, purpose })
+    if (resendRes) return resendRes
+  }
 
-  if (isCloudHost && process.env.BREVO_API_KEY) {
-    // 1. Fast cloud delivery via Brevo HTTP API (Port 443)
+  // 2. Brevo (Cloud HTTP fallback or primary if configured)
+  if (process.env.BREVO_API_KEY) {
     const brevoRes = await sendViaBrevo({ to, subject, html, purpose })
     if (brevoRes) return brevoRes
+  }
 
-    // 2. Fallback to SMTP if Brevo fails
+  // 3. Primary Nodemailer SMTP (Local or standard SMTP)
+  if (process.env.SMTP_USER && process.env.SMTP_PASS) {
     const smtpRes = await sendViaSmtp({ to, subject, html, purpose })
     if (smtpRes) return smtpRes
-  } else {
-    // 1. Local environment: Primary SMTP
-    const smtpRes = await sendViaSmtp({ to, subject, html, purpose })
-    if (smtpRes) return smtpRes
-
-    // 2. Cloud Fallback: Brevo HTTP API
-    const brevoRes = await sendViaBrevo({ to, subject, html, purpose })
-    if (brevoRes) return brevoRes
   }
 
   return { success: false, provider: 'none' }

@@ -25,7 +25,8 @@ const healthCheckHandler = (req, res) => {
     uptime: `${Math.floor(process.uptime())}s`,
     timestamp: new Date().toISOString(),
     primaryEmailConfigured: Boolean(process.env.SMTP_USER),
-    fallbackBrevoConfigured: Boolean(process.env.BREVO_API_KEY),
+    resendConfigured: Boolean(process.env.RESEND_API_KEY),
+    brevoConfigured: Boolean(process.env.BREVO_API_KEY),
   })
 }
 
@@ -43,8 +44,9 @@ app.listen(PORT, () => {
   console.log(`\n=================================================`)
   console.log(`🔥 baggyHood Backend running on http://localhost:${PORT}`)
   console.log(`🔒 Destination Admin Email: ${process.env.ADMIN_EMAIL || 'udaychaudhary419@gmail.com'} (HIDDEN FROM USERS)`)
-  console.log(`📬 Primary SMTP: ${process.env.SMTP_USER ? 'Configured' : 'Not set (using Brevo/fallback)'}`)
-  console.log(`🚀 Brevo HTTP API: ${process.env.BREVO_API_KEY ? 'Configured' : 'Not set'}`)
+  console.log(`🚀 Resend HTTP API: ${process.env.RESEND_API_KEY ? 'Configured (Primary)' : 'Not set'}`)
+  console.log(`📬 Brevo HTTP API: ${process.env.BREVO_API_KEY ? 'Configured' : 'Not set'}`)
+  console.log(`✉️ Primary SMTP: ${process.env.SMTP_USER ? 'Configured' : 'Not set'}`)
   console.log(`💬 WhatsApp Welcome Bot: ${process.env.ENABLE_WHATSAPP_WELCOME === 'true' ? 'Enabled' : 'Disabled'}`)
   console.log(`=================================================\n`)
 })

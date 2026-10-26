@@ -18,10 +18,19 @@ function extractEmail(str) {
 /**
  * Send email via Brevo REST API (over HTTPS port 443 — guaranteed to work on cloud hosts like Render)
  */
-async function sendViaBrevo({ to, subject, html, purpose, senderName, senderEmail }) {
+/**
+ * Send email via Brevo REST API (over HTTPS port 443 — guaranteed to work on cloud hosts like Render)
+ * Note: Brevo STRICTLY requires the sender email to be an active verified sender in your Brevo account.
+ */
+async function sendViaBrevo({ to, subject, html, purpose }) {
   if (!process.env.BREVO_API_KEY) return null
+
+  // Official brand sender: baggyhoodindia@gmail.com
+  const brevoEmail = extractEmail(process.env.BREVO_SENDER_EMAIL || process.env.SMTP_USER || 'baggyhoodindia@gmail.com')
+  const senderName = process.env.BREVO_SENDER_NAME || 'baggyHood Drops'
+
   try {
-    console.log(`[Email] Attempting ${purpose} via Brevo HTTP API (Port 443)...`)
+    console.log(`[Email] Attempting ${purpose} via Brevo HTTP API from official sender: ${brevoEmail}...`)
     const response = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
@@ -32,7 +41,11 @@ async function sendViaBrevo({ to, subject, html, purpose, senderName, senderEmai
       body: JSON.stringify({
         sender: {
           name: senderName,
-          email: senderEmail,
+          email: brevoEmail,
+        },
+        replyTo: {
+          name: senderName,
+          email: brevoEmail,
         },
         to: [{ email: to }],
         subject,
@@ -40,13 +53,18 @@ async function sendViaBrevo({ to, subject, html, purpose, senderName, senderEmai
       }),
     })
 
+    const resText = await response.text()
+    let resJson = {}
+    try {
+      resJson = JSON.parse(resText)
+    } catch {}
+
     if (!response.ok) {
-      const errText = await response.text()
-      throw new Error(`Brevo HTTP API ${response.status}: ${errText}`)
+      throw new Error(`Brevo HTTP API ${response.status}: ${resText}`)
     }
 
-    console.log(`✅ [Email] ${purpose} successfully delivered via Brevo HTTP API to ${to}`)
-    return { success: true, provider: 'brevo' }
+    console.log(`✅ [Email] ${purpose} accepted by Brevo API (MessageId: ${resJson.messageId || 'ok'}) to ${to}`)
+    return { success: true, provider: 'brevo', messageId: resJson.messageId }
   } catch (err) {
     console.warn(`⚠️ [Email] Brevo API attempt failed for ${purpose}: ${err.message}`)
     return null
@@ -56,10 +74,13 @@ async function sendViaBrevo({ to, subject, html, purpose, senderName, senderEmai
 /**
  * Send email via Primary Nodemailer SMTP (works locally, but ports 465/587 are blocked on Render free tier)
  */
-async function sendViaSmtp({ to, subject, html, purpose, senderName, senderEmail }) {
+async function sendViaSmtp({ to, subject, html, purpose }) {
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS) return null
+  const smtpEmail = extractEmail(process.env.SMTP_USER)
+  const senderName = process.env.BREVO_SENDER_NAME || 'baggyHood Drops'
+
   try {
-    console.log(`[Email] Attempting ${purpose} via Primary SMTP...`)
+    console.log(`[Email] Attempting ${purpose} via Primary SMTP from: ${smtpEmail}...`)
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: Number(process.env.SMTP_PORT) || 465,
@@ -72,15 +93,15 @@ async function sendViaSmtp({ to, subject, html, purpose, senderName, senderEmail
       greetingTimeout: 4000,
     })
 
-    await transporter.sendMail({
-      from: `"${senderName}" <${senderEmail}>`,
+    const info = await transporter.sendMail({
+      from: `"${senderName}" <${smtpEmail}>`,
       to,
       subject,
       html,
     })
 
-    console.log(`✅ [Email] ${purpose} sent via Primary SMTP to ${to}`)
-    return { success: true, provider: 'smtp' }
+    console.log(`✅ [Email] ${purpose} sent via Primary SMTP to ${to} (MessageId: ${info.messageId})`)
+    return { success: true, provider: 'smtp', messageId: info.messageId }
   } catch (smtpErr) {
     console.warn(`⚠️ [Email] SMTP attempt failed for ${purpose}: ${smtpErr.message}`)
     return null
@@ -93,26 +114,23 @@ async function sendViaSmtp({ to, subject, html, purpose, senderName, senderEmail
  * - Local / Self-hosted: Prioritizes SMTP with Brevo fallback
  */
 async function dispatchEmail({ to, subject, html, purpose }) {
-  const senderEmail = extractEmail(process.env.SMTP_USER || process.env.BREVO_SENDER_EMAIL || 'udaychaudhary419@gmail.com')
-  const senderName = process.env.BREVO_SENDER_NAME || 'baggyHood Drops'
-
   const isCloudHost = Boolean(process.env.RENDER) || process.env.EMAIL_PROVIDER === 'brevo'
 
   if (isCloudHost && process.env.BREVO_API_KEY) {
     // 1. Fast cloud delivery via Brevo HTTP API (Port 443)
-    const brevoRes = await sendViaBrevo({ to, subject, html, purpose, senderName, senderEmail })
+    const brevoRes = await sendViaBrevo({ to, subject, html, purpose })
     if (brevoRes) return brevoRes
 
     // 2. Fallback to SMTP if Brevo fails
-    const smtpRes = await sendViaSmtp({ to, subject, html, purpose, senderName, senderEmail })
+    const smtpRes = await sendViaSmtp({ to, subject, html, purpose })
     if (smtpRes) return smtpRes
   } else {
     // 1. Local environment: Primary SMTP
-    const smtpRes = await sendViaSmtp({ to, subject, html, purpose, senderName, senderEmail })
+    const smtpRes = await sendViaSmtp({ to, subject, html, purpose })
     if (smtpRes) return smtpRes
 
     // 2. Cloud Fallback: Brevo HTTP API
-    const brevoRes = await sendViaBrevo({ to, subject, html, purpose, senderName, senderEmail })
+    const brevoRes = await sendViaBrevo({ to, subject, html, purpose })
     if (brevoRes) return brevoRes
   }
 

@@ -151,7 +151,10 @@ export function buildCustomerWelcomeEmailHTML({ size, shade }) {
     <!-- Footer -->
     <div style="background-color: #0b0d0c; border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 32px; text-align: center;">
       <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.4);">
-        © 2026 baggyHood. Built for the streets. Made for your fit.
+        © 2026 baggyHood • <a href="https://www.baggyhood.in" style="color: #a9ad87; text-decoration: none; font-weight: 600;">www.baggyhood.in</a>
+      </p>
+      <p style="margin: 6px 0 0; font-size: 10px; color: rgba(255,255,255,0.3);">
+        Built for the streets. Made for your fit.
       </p>
     </div>
   </div>

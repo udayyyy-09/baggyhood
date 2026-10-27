@@ -10,11 +10,33 @@ dotenv.config({ path: path.join(process.cwd(), '.env') })
 const app = express()
 const PORT = process.env.PORT || 5050
 
-// Middlewares
-app.use(cors({
-  origin: '*', // Allow frontend requests
-  methods: ['GET', 'POST', 'OPTIONS'],
-}))
+// Strict CORS Policy: Only allow your official production domains
+const defaultAllowedOrigins = [
+  'https://www.baggyhood.in',
+  'https://baggyhood.in',
+]
+
+// Optional extra origins from .env (e.g. ALLOWED_ORIGINS=http://localhost:5173)
+const customOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim())
+  : []
+
+const allowedOrigins = [...new Set([...defaultAllowedOrigins, ...customOrigins])]
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (such as server-to-server health checks or curl)
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true)
+      }
+      return callback(new Error(`CORS blocked request from unauthorized origin: ${origin}`))
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+)
 app.use(express.json())
 
 // Health check endpoints (supports /health, /api/health, and /)
@@ -44,6 +66,7 @@ app.listen(PORT, () => {
   console.log(`\n=================================================`)
   console.log(`🔥 baggyHood Backend running on http://localhost:${PORT}`)
   console.log(`🔒 Destination Admin Email: ${process.env.ADMIN_EMAIL || 'udaychaudhary419@gmail.com'} (HIDDEN FROM USERS)`)
+  console.log(`🛡️ Allowed CORS Origins: ${allowedOrigins.join(', ')}`)
   console.log(`🚀 Resend HTTP API: ${process.env.RESEND_API_KEY ? 'Configured (Primary)' : 'Not set'}`)
   console.log(`📬 Brevo HTTP API: ${process.env.BREVO_API_KEY ? 'Configured' : 'Not set'}`)
   console.log(`✉️ Primary SMTP: ${process.env.SMTP_USER ? 'Configured' : 'Not set'}`)

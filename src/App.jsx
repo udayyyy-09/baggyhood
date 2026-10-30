@@ -10,6 +10,8 @@ const shades = [
   {
     name: 'Vintage Washed Grey',
     short: 'Washed Grey',
+    price: '₹1,350',
+    length: '42″',
     tone: '#666866',
     image: '/Oversized Indigo Jeans and Chunky Boots.png',
     slug: 'vintage-washed-grey',
@@ -55,6 +57,8 @@ const shades = [
   {
     name: 'Dark Brown',
     short: 'Dark Brown',
+    price: '₹1,350',
+    length: '42″',
     tone: '#4b3326',
     image: '/Baggy Black Denim Streetwear Look.png',
     slug: 'dark-brown',
@@ -100,6 +104,8 @@ const shades = [
   {
     name: 'Vintage Olive / Green',
     short: 'Vintage Olive',
+    price: '₹1,500',
+    length: '44″',
     tone: '#555b3b',
     image: '/Oversized Blue Wide-Leg Jeans Look.png',
     slug: 'vintage-olive',
@@ -147,30 +153,33 @@ const shades = [
 const upcomingDrips = [
   {
     // tag: 'DROP #02 // LAB',
-    title: '480 GSM Boxy Hoods',
-    sub: 'Heavyweight French Terry',
-    desc: 'Exaggerated drop-shoulders, double-lined hood, and a tight boxy waist that sits perfectly atop baggy denim.',
+    title: 'Navy Oxford Shirt',
+    sub: 'Garment-Dyed Cotton',
+    price: 'Starting from ₹799',
+    desc: 'Navy Blue Oxford Shirt, designed for a clean, sophisticated, and versatile look. Featuring a classic button-down collar, full sleeves, and a neat front button closure',
     status: 'Sampling Phase',
-    badge: 'Next Up',
-    image: '/Black Yokohama Varsity Jersey.png',
+    badge: 'From ₹799',
+    image: '/Navy Oxford Shirt on Wooden Hanger.png',
   },
   {
     // tag: 'DROP #03 // ARCHIVE',
     title: 'Carpenter Baggy Denim',
     sub: 'Heavy Duck Canvas & Denim',
+    price: 'Starting from ₹799',
     desc: 'Double-knee reinforcement, authentic hammer loop, and an extra stacked 44″–46″ drape for heavy sneaker stacking.',
     status: 'In Patterning',
-    badge: 'Dropping Q1',
+    badge: 'From ₹799',
     image: '/upcoming-drip.jpeg',
   },
   {
     // tag: 'DROP #04 // VAULT',
-    title: 'Mineral Acid Washes',
-    sub: 'Sun-Bleached & Distressed',
-    desc: 'Hand-distressed raw hems, oil tinting, and mineral stone washing for that worn-in vintage collector look.',
+    title: 'Relaxed Oxford Button-Down',
+    sub: 'Garment-Dyed Cotton',
+    price: 'Starting from ₹799',
+    desc: 'A relaxed button-down cut with an easy streetwear drape, chest pocket, and garment-washed vintage softness.',
     status: 'Secret Vault',
-    badge: 'Limited Batch',
-    image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=900&q=85',
+    badge: 'From ₹799',
+    image: '/Dusty Pink Oxford Shirt on Wooden Hanger.png',
   },
 ]
 
@@ -189,8 +198,219 @@ const sizeChartData = [
   { name: 'Leg opening', values: ['10″', '10.5″', '11″', '11.5″', '12″'], highlight: false },
 ]
 
+const collectionProducts = [
+  // 1. Denim
+  {
+    id: 'denim-grey',
+    category: 'denim',
+    categoryLabel: 'Denim',
+    name: 'Vintage Washed Grey Wide-Leg Jeans',
+    tag: '14 OZ RIGID COTTON',
+    badge: 'DROP #01 PRIORITY',
+    price: '₹1,350',
+    size: 'Length: 42″',
+    jeansLength: '42″',
+    silhouette: 'Wide-Leg Sneaker Stack',
+    priceEstimate: 'Drop #01 — ₹1,350',
+    image: '/vintage-washed-grey-front.png',
+    gallery: [
+      '/vintage-washed-grey-front.png',
+      '/vintage-washed-grey-back.png',
+      '/vintage-washed-grey-stack.png',
+    ],
+    specs: [
+      'Jeans length: 42″ (deep sneaker stack)',
+      '100% Heavyweight Cotton (14 oz)',
+      'Roomy relaxed fit through hips and thighs',
+      'Reinforced seams & silver nickel rivets',
+    ],
+    description:
+      'Our signature wide-leg jeans in a vintage faded grey wash. Cut in a 42″ length so they pool cleanly over your sneakers without dragging on the ground. Sturdy, comfortable, and made to get softer with every wear.',
+  },
+  {
+    id: 'denim-brown',
+    category: 'denim',
+    categoryLabel: 'Denim',
+    name: 'Dark Mocha Brown Wide-Leg Jeans',
+    tag: '14 OZ VINTAGE WASH',
+    badge: 'SIGNATURE COLORWAY',
+    price: '₹1,350',
+    size: 'Length: 42″',
+    jeansLength: '42″',
+    silhouette: 'Relaxed Wide Fit',
+    priceEstimate: 'Drop #01 — ₹1,350',
+    image: '/dark-brown-front.png',
+    gallery: [
+      '/dark-brown-front.png',
+      '/dark-brown-back.png',
+      '/dark-brown-side.png',
+    ],
+    specs: [
+      'Jeans length: 42″ (deep sneaker stack)',
+      'Deep mocha wash with subtle vintage fade',
+      'Heavy 14 oz cotton that holds its structure',
+      'Classic 5-pocket cut with reinforced back yoke',
+    ],
+    description:
+      'Rich chocolate brown denim with a subtle vintage wash. Cut in a 42″ length with generous room through the thighs and legs for easy all-day comfort, hanging in a clean straight fall that pairs perfectly with chunky sneakers or boots.',
+  },
+  {
+    id: 'denim-olive',
+    category: 'denim',
+    categoryLabel: 'Denim',
+    name: 'Vintage Olive Green Wide-Leg Jeans',
+    tag: '14 OZ MILITARY WASH',
+    badge: 'LIMITED QUANTITY',
+    price: '₹1,500',
+    size: 'Length: 44″',
+    jeansLength: '44″',
+    silhouette: 'Oversized Streetwear Fit',
+    priceEstimate: 'Drop #01 — ₹1,500',
+    image: '/vintage-olive-front.png',
+    gallery: [
+      '/vintage-olive-front.png',
+      '/vintage-olive-back.png',
+      '/vintage-olive-stack.png',
+    ],
+    specs: [
+      'Jeans length: 44″ (extra stacked drape)',
+      'Earthy olive green stonewashed finish',
+      '14 oz durable rigid cotton denim',
+      'Heavy-duty pocket liners & sturdy waist patch',
+    ],
+    description:
+      'An earthy olive green shade with an authentic stonewashed look. Cut in a longer 44″ length for an extra-stacked puddle over your kicks, giving you complete freedom to move with zero bunching.',
+  },
+  // 2. Heavyweight Tees & Tops
+  {
+    id: 'tee-smiley',
+    category: 'tees',
+    categoryLabel: 'Heavyweight Tees',
+    name: 'Smileyworld "Mission Unknown" Boxy Tee — Washed Brown',
+    tag: '280 GSM COMBED COTTON',
+    badge: 'COMMUNITY FAVORITE',
+    price: '₹799',
+    size: 'L',
+    silhouette: 'Boxy Drop-Shoulder Fit',
+    priceEstimate: 'Drop #01 — ₹799',
+    image: '/Smileyworld Mission Unknown T-Shirt.png',
+    gallery: [
+      '/Smileyworld Mission Unknown T-Shirt.png',
+      '/Vintage Smileyworld Oversized T-Shirt.png',
+    ],
+    specs: [
+      'Size: L (Boxy drop-shoulder fit)',
+      'Heavy 280 GSM cotton that drapes cleanly',
+      'Detailed "Mission Unknown" graphic back print',
+      'Pre-shrunk vintage enzyme wash for ultra-soft hand',
+    ],
+    description:
+      'A heavyweight vintage-washed brown tee featuring the bold Smileyworld "Mission Into The Unknown" artwork on the back and subtle smiley icons on the chest. Cut boxy in Size L with relaxed drop shoulders and a thick collar that stays flat.',
+  },
+  {
+    id: 'tee-birds',
+    category: 'tees',
+    categoryLabel: 'Heavyweight Tees',
+    name: 'Flying Birds Oversized Graphic Tee — Washed Black',
+    tag: '280 GSM HEAVY COTTON',
+    badge: 'NEW ARRIVAL',
+    price: '₹1099',
+    size: 'L',
+    silhouette: 'Oversized Streetwear Fit',
+    priceEstimate: 'Drop #01 — ₹1,099',
+    image: '/Oversized Black T-Shirt with Colourful Birds.png',
+    gallery: [
+      '/Oversized Black T-Shirt with Colourful Birds.png',
+    ],
+    specs: [
+      'Size: L (Oversized relaxed drape)',
+      'Vibrant painted swallows artwork across the back',
+      'Substantial 280 GSM combed cotton',
+      'Durable ribbed collar that holds shape after wash',
+    ],
+    description:
+      'A washed black heavyweight t-shirt featuring vivid blue and yellow painted flying birds across the back. Cut in Size L with dropped shoulders, delivering an easy, comfortable drape over your favorite baggy jeans.',
+  },
+  {
+    id: 'tee-henley',
+    category: 'tees',
+    categoryLabel: 'Tops & Layers',
+    name: 'Waffle-Knit Long-Sleeve Henley — Dark Charcoal',
+    tag: 'TEXTURED WAFFLE KNIT',
+    badge: 'DAILY ESSENTIAL',
+    price: '₹899',
+    size: 'M',
+    silhouette: 'Relaxed Casual Fit',
+    priceEstimate: 'Drop #01 — ₹899',
+    image: '/Dark Charcoal Henley on Wooden Hanger.png',
+    gallery: [
+      '/Dark Charcoal Henley on Wooden Hanger.png',
+    ],
+    specs: [
+      'Size: M (Comfortable everyday fit)',
+      'Textured waffle-knit cotton for breathable warmth',
+      'Traditional 4-button front henley placket',
+      'Versatile dark charcoal that matches any wash',
+    ],
+    description:
+      'A versatile dark charcoal long-sleeve henley crafted from soft, textured waffle-knit cotton. Cut in Size M with a 4-button placket and snug cuffs, making it effortless to wear alone or layered under jackets and overshirts.',
+  },
+  {
+    id: 'tee-yokohama',
+    category: 'tees',
+    categoryLabel: 'Heavyweight Tees',
+    name: 'Yokohama Varsity Athletic Jersey — Black & White',
+    tag: 'VARSITY MESH KNIT',
+    badge: 'LIMITED EDITION',
+    price: '₹1,199',
+    size: 'M',
+    silhouette: 'Boxy Athletic Fit',
+    priceEstimate: 'Drop #01 — ₹1,199',
+    image: '/Black Yokohama Varsity Jersey.png',
+    gallery: [
+      '/Black Yokohama Varsity Jersey.png',
+    ],
+    specs: [
+      'Size: M (Athletic streetwear cut)',
+      'Breathable poly-cotton athletic mesh knit',
+      'Archival Yokohama lettering & Kanji script',
+      'Contrast ribbed V-neck & striped sleeve bands',
+    ],
+    description:
+      'A retro Tokyo street jersey inspired by classic Japanese motorsport varsity wear. Cut in Size M with arched "YOKOHAMA" lettering across the chest, striped sleeve bands, and a roomy cut that pairs effortlessly with wide denim.',
+  },
+  // 3. Sweatshirts & Hoodies
+  {
+    id: 'crewneck-beige',
+    category: 'sweatshirts',
+    categoryLabel: 'Sweatshirts & Fleece',
+    name: 'ABRAX Minimalist Crewneck Sweatshirt — Sand Beige',
+    tag: '460 GSM HEAVY FLEECE',
+    badge: 'WARDROBE STAPLE',
+    price: '₹1,299',
+    size: 'M',
+    silhouette: 'Drop-Shoulder Boxy Crew',
+    priceEstimate: 'Drop #01 — ₹1,299',
+    image: '/Beige ABRAX Crewneck Sweatshirt Display.png',
+    gallery: [
+      '/Beige ABRAX Crewneck Sweatshirt Display.png',
+    ],
+    specs: [
+      'Size: M (Boxy drop-shoulder fall)',
+      'Heavyweight 460 GSM fleece with cozy brushed interior',
+      'Minimal ABRAX woven label on the left chest',
+      'Stretchy ribbed neck, cuffs, and hem that hold shape',
+    ],
+    description:
+      'A super cozy crewneck sweatshirt in a clean sand beige hue. Built in Size M from thick 460 GSM fleece with dropped shoulders and a subtle chest tab, giving you a laid-back, clean look that sits comfortably over baggy jeans.',
+  },
+]
+
 function App() {
   const [selectedShade, setSelectedShade] = useState(0)
+  const [productCategory, setProductCategory] = useState('all')
+  const [inspectProduct, setInspectProduct] = useState(null)
+  const [inspectImage, setInspectImage] = useState(null)
   const [activeLightbox, setActiveLightbox] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [savedVip, setSavedVip] = useState(() => {
@@ -221,17 +441,30 @@ function App() {
     return '32 (44″ Length)'
   })
 
+  const openInspect = (product) => {
+    setInspectProduct(product)
+    setInspectImage(product.image)
+  }
+
+  const closeInspect = () => {
+    setInspectProduct(null)
+    setInspectImage(null)
+  }
+
   useEffect(() => {
-    if (!activeLightbox) return
+    if (!activeLightbox && !inspectProduct) return
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setActiveLightbox(null)
-      if (e.key === 'ArrowRight') {
+      if (e.key === 'Escape') {
+        setActiveLightbox(null)
+        closeInspect()
+      }
+      if (e.key === 'ArrowRight' && activeLightbox) {
         setActiveLightbox((prev) => prev && {
           ...prev,
           angleIndex: (prev.angleIndex + 1) % shades[prev.shadeIndex].angles.length,
         })
       }
-      if (e.key === 'ArrowLeft') {
+      if (e.key === 'ArrowLeft' && activeLightbox) {
         setActiveLightbox((prev) => prev && {
           ...prev,
           angleIndex: (prev.angleIndex - 1 + shades[prev.shadeIndex].angles.length) % shades[prev.shadeIndex].angles.length,
@@ -240,7 +473,11 @@ function App() {
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [activeLightbox])
+  }, [activeLightbox, inspectProduct])
+
+  const filteredProducts = productCategory === 'all'
+    ? collectionProducts
+    : collectionProducts.filter((p) => p.category === productCategory)
 
   const joinWaitlist = async (event) => {
     event.preventDefault()
@@ -296,12 +533,14 @@ function App() {
   }
 
   const scrollToWaitlist = () => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })
+  const scrollToWardrobe = () => document.getElementById('wardrobe')?.scrollIntoView({ behavior: 'smooth' })
   const scrollToComingSoon = () => document.getElementById('coming-soon')?.scrollIntoView({ behavior: 'smooth' })
 
   const navItems = [
     { label: 'Home', href: '#home' },
     { label: 'The denim', href: '#denim' },
     { label: 'Shades', href: '#shades' },
+    { label: 'Wardrobe', href: '#wardrobe' },
     { label: 'Fit & size', href: '#fit' },
     { label: 'Coming soon', href: '#coming-soon' },
   ]
@@ -397,42 +636,79 @@ function App() {
         <section id="shades" className="bg-paper py-20 text-ink md:py-24">
           <div className="mx-auto max-w-7xl px-5 md:px-10">
             <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <div><p className="eyebrow-dark">02 — The first drop</p><h2 className="section-title-dark mt-4">THREE SHADES.<br />ENDLESS FITS.</h2><p className="mt-4 text-sm text-ink/65">A tight palette. A lot of ways to make it yours.</p></div>
-              <p className="max-w-xs text-xs leading-6 text-ink/60">Drop #1 is in the works. Pick your shade and join the waitlist to get first access when the collection goes live.</p>
+              <div>
+                <p className="eyebrow-dark">02 — The first drop</p>
+                <h2 className="section-title-dark mt-4">
+                  THREE SHADES.<br />
+                  ENDLESS FITS.
+                </h2>
+                <p className="mt-4 text-sm text-ink/65">
+                  A tight palette. A lot of ways to make it yours.
+                </p>
+                
+              </div>
+              <p className="max-w-xs text-xs leading-6 text-ink/60">
+                Drop #1 is in the works. Pick your shade and join the waitlist to get first access when the collection goes live.
+              </p>
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-3">
-              {shades.map((shade, index) => <button key={shade.name} onClick={() => setSelectedShade(index)} className={`shade-card text-left ${selectedShade === index ? 'shade-selected' : ''}`}>
-                <div className="relative overflow-hidden bg-[#d7d5cd]">
-                  <img
-                    src={shade.image}
-                    alt={`${shade.name} denim inspiration`}
-                    className="h-[300px] w-full object-cover object-bottom transition duration-700 hover:scale-105 sm:h-[360px]"
-                  />
-                  <span className="absolute left-4 top-4 rounded-full bg-paper/90 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.15em]">0{index + 1}</span>
-                  <div className="absolute bottom-4 right-4 flex items-center gap-2">
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setSelectedShade(index)
-                        setActiveLightbox({ shadeIndex: index, angleIndex: 0 })
-                      }}
-                      title="Inspect all angles"
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-white/70 bg-black/40 text-white transition hover:bg-white hover:text-ink hover:scale-110"
-                    >
-                      <Maximize2 size={13} />
-                    </span>
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/70 bg-black/20 text-white">
-                      {selectedShade === index && <Check size={15} />}
+              {shades.map((shade, index) => (
+                <button
+                  key={shade.name}
+                  onClick={() => setSelectedShade(index)}
+                  className={`shade-card text-left ${selectedShade === index ? 'shade-selected' : ''}`}
+                >
+                  <div className="relative overflow-hidden bg-[#d7d5cd]">
+                    <img
+                      src={shade.image}
+                      alt={`${shade.name} denim inspiration`}
+                      className="h-[300px] w-full object-cover object-bottom transition duration-700 hover:scale-105 sm:h-[360px]"
+                    />
+                    {/* Top floating pill tags (Place 1) */}
+                    <div className="absolute left-4 top-4 flex items-center gap-1.5">
+                      <span className="rounded-full bg-paper/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.15em]">
+                        0{index + 1}
+                      </span>
+                      <span className="rounded-full bg-black/85 px-2.5 py-1 text-[10px] font-extrabold text-white backdrop-blur-md">
+                        {shade.price || '₹1,400'}
+                      </span>
+                    </div>
+
+                    <div className="absolute bottom-4 right-4 flex items-center gap-2">
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setSelectedShade(index)
+                          setActiveLightbox({ shadeIndex: index, angleIndex: 0 })
+                        }}
+                        title="Inspect all angles"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/70 bg-black/40 text-white transition hover:bg-white hover:text-ink hover:scale-110"
+                      >
+                        <Maximize2 size={13} />
+                      </span>
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/70 bg-black/20 text-white">
+                        {selectedShade === index && <Check size={15} />}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Card bottom info (Place 2) */}
+                  <div className="flex items-center justify-between py-4">
+                    <div className="flex items-center gap-3">
+                      <span className="h-3 w-3 rounded-full ring-1 ring-black/20" style={{ backgroundColor: shade.tone }} />
+                      <div>
+                        <span className="text-sm font-bold block">{shade.name}</span>
+                        <span className="text-[11px] font-medium text-ink/65">
+                          Jeans length: <strong className="text-ink">{shade.length || (index === 2 ? '44″' : '42″')}</strong>
+                        </span>
+                      </div>
+                    </div>
+                    <span className="text-sm font-extrabold text-[#656a4d]">
+                      {shade.price || '₹1,400'}
                     </span>
                   </div>
-                </div>
-                <div className="flex items-center justify-between py-4">
-                  <div className="flex items-center gap-3">
-                    <span className="h-3 w-3 rounded-full ring-1 ring-black/20" style={{ backgroundColor: shade.tone }} />
-                    <span className="text-sm font-bold">{shade.name}</span>
-                  </div>
-                </div>
-              </button>)}
+                </button>
+              ))}
             </div>
 
             {/* Dynamic 4-Angle Cards for the Selected Shade */}
@@ -445,8 +721,14 @@ function App() {
                       Multi-Angle Inspection
                     </p>
                   </div>
-                  <h3 className="mt-1 font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">
-                    {shades[selectedShade].name}
+                  <h3 className="mt-1 font-display text-xl font-bold tracking-tight text-ink sm:text-2xl flex flex-wrap items-baseline gap-2.5">
+                    <span>{shades[selectedShade].name}</span>
+                    <span className="text-sm font-extrabold text-[#656a4d]">
+                      {shades[selectedShade].price || '₹1,400'}
+                    </span>
+                    <span className="rounded-full border border-black/15 bg-white/70 px-2.5 py-0.5 text-xs font-semibold text-ink/75">
+                      Jeans length: {shades[selectedShade].length || (selectedShade === 2 ? '44″' : '42″')}
+                    </span>
                   </h3>
                 </div>
                 <div className="flex items-center gap-2 self-start rounded-full border border-black/15 bg-white/70 px-3.5 py-1.5 text-[11px] font-semibold text-ink/80 sm:self-auto shadow-sm">
@@ -494,14 +776,201 @@ function App() {
               </div>
             </div>
 
-            <div className="mt-8 flex flex-col justify-between gap-4 border-t border-black/15 pt-6 sm:flex-row sm:items-center"><p className="text-xs text-ink/65">Currently selected: <strong className="text-ink">{shades[selectedShade].name}</strong></p><button onClick={scrollToWaitlist} className="inline-flex items-center gap-3 self-start rounded-full bg-ink px-6 py-3.5 text-xs font-bold text-white transition hover:bg-olive sm:self-auto">Get first access <ArrowRight size={15} /></button></div>
+            <div className="mt-8 flex flex-col justify-between gap-4 border-t border-black/15 pt-6 sm:flex-row sm:items-center">
+              <p className="text-xs text-ink/65">
+                Currently selected: <strong className="text-ink">{shades[selectedShade].name}</strong> — <strong className="text-[#656a4d]">{shades[selectedShade].price || '₹1,400'}</strong> (Jeans Length: <strong>{shades[selectedShade].length || (selectedShade === 2 ? '44″' : '42″')}</strong>)
+              </p>
+              <button
+                onClick={scrollToWaitlist}
+                className="inline-flex items-center gap-3 self-start rounded-full bg-ink px-6 py-3.5 text-xs font-bold text-white transition hover:bg-olive sm:self-auto"
+              >
+                Get first access <ArrowRight size={15} />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* 03 — COMPLETE WARDROBE VAULT (JEANS, TEES & SWEATSHIRTS) */}
+        <section id="wardrobe" className="relative bg-[#0a0d0b] py-20 text-white md:py-28 border-b border-white/10">
+          <div className="mx-auto max-w-7xl px-5 md:px-10">
+            {/* Section Header */}
+            <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+              <div>
+                <p className="eyebrow">03 — Complete Wardrobe Vault</p>
+                <h2 className="section-title mt-4">
+                  BUILT FOR THE ROTATION.<br />
+                  <span className="text-[#a9ad87]">JEANS, TEES & SWEATSHIRTS.</span>
+                </h2>
+                <p className="mt-4 max-w-xl text-sm leading-6 text-white/60">
+                  Every silhouette in our rotation is custom milled with heavyweight substance: 14oz rigid puddle-stack denim (₹1,400), 280 GSM graphic tees (from ₹899), waffle henleys (₹899), and heavy fleece (₹1,299).
+                </p>
+              </div>
+
+              {/* Interactive Category Filter Pills */}
+              <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-white/10 bg-white/[.03] p-1.5 backdrop-blur-md">
+                {[
+                  { key: 'all', label: 'All Pieces', count: collectionProducts.length },
+                  { key: 'denim', label: 'Wide Denim', count: collectionProducts.filter((p) => p.category === 'denim').length },
+                  { key: 'tees', label: 'Tees & Tops', count: collectionProducts.filter((p) => p.category === 'tees').length },
+                  { key: 'sweatshirts', label: 'Fleece & Hoodies', count: collectionProducts.filter((p) => p.category === 'sweatshirts').length },
+                ].map((tab) => {
+                  const active = productCategory === tab.key
+                  return (
+                    <button
+                      key={tab.key}
+                      onClick={() => setProductCategory(tab.key)}
+                      className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition duration-200 ${
+                        active
+                          ? 'bg-[#a9ad87] text-ink shadow-lg shadow-[#a9ad87]/20'
+                          : 'text-white/65 hover:bg-white/[.06] hover:text-white'
+                      }`}
+                    >
+                      <span>{tab.label}</span>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[9px] font-extrabold ${
+                          active ? 'bg-ink text-[#a9ad87]' : 'bg-white/10 text-white/50'
+                        }`}
+                      >
+                        {tab.count}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Products Grid */}
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filteredProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[.05] via-white/[.02] to-transparent p-4 transition duration-300 hover:border-[#a9ad87]/60 hover:shadow-2xl hover:shadow-[#a9ad87]/10"
+                >
+                  {/* Image Presentation */}
+                  <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden rounded-xl bg-black/50">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
+                    />
+                    {/* Shadow scrim */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-60 transition duration-300 group-hover:opacity-30" />
+
+                    {/* Top floating price & size badge (Price Place 1) */}
+                    <div className="absolute left-3 top-3 flex items-center gap-1.5">
+                      <span className="rounded-full border border-white/20 bg-black/85 px-2.5 py-1 text-[11px] font-black tracking-wide text-[#a9ad87] backdrop-blur-md shadow-md">
+                        {product.price}
+                      </span>
+                      <span className="rounded-full border border-white/15 bg-black/65 px-2 py-1 text-[10px] font-bold text-white/85 backdrop-blur-md">
+                        {product.category === 'denim' ? product.size : `Size: ${product.size}`}
+                      </span>
+                    </div>
+
+                    {/* Bottom floating details & inspect trigger */}
+                    <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-2">
+                      <span className="truncate rounded-ful px-2.5 py-1 text-[9px] font-semibold text-white/80 backdrop-blur-md">
+                        {/* {product.silhouette} */}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => openInspect(product)}
+                        title="Quick Inspect"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/40 bg-black/70 text-white shadow-lg backdrop-blur-md transition hover:scale-110 hover:border-[#a9ad87] hover:bg-[#a9ad87] hover:text-ink"
+                      >
+                        <Maximize2 size={13} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Card Info */}
+                  <div className="flex flex-1 flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#a9ad87]">
+                          {product.categoryLabel} • {product.badge}
+                        </p>
+                        {/* Price (Price Place 2) */}
+                        <span className="text-xs font-black text-[#d8dcbe]">
+                          {product.price}
+                        </span>
+                      </div>
+                      <h3 className="mt-1 text-base font-bold text-white transition group-hover:text-[#d8dcbe]">
+                        {product.name}
+                      </h3>
+                      <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-white/55">
+                        {product.description}
+                      </p>
+
+                      {/* Specs badges */}
+                      <div className="mt-3.5 flex flex-wrap gap-1.5">
+                        {product.specs.slice(0, 2).map((spec, i) => (
+                          <span
+                            key={i}
+                            className="rounded-md border border-white/10 bg-white/[.03] px-2 py-0.5 text-[10px] text-white/60"
+                          >
+                            ✦ {spec}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action footer */}
+                    <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-3.5">
+                      <button
+                        type="button"
+                        onClick={() => openInspect(product)}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/70 transition hover:text-white"
+                      >
+                        <Eye size={13} className="text-[#a9ad87]" /> View Details
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (product.category === 'denim') {
+                            const idx = shades.findIndex((s) =>
+                              product.name.toLowerCase().includes(s.name.toLowerCase().split(' ')[0])
+                            )
+                            if (idx !== -1) setSelectedShade(idx)
+                          }
+                          scrollToWaitlist()
+                        }}
+                        className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#a9ad87] hover:text-ink"
+                      >
+                        Reserve Fit <ArrowRight size={12} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom Capsule Banner */}
+            <div className="mt-14 flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/[.02] p-6 backdrop-blur-md sm:p-8 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#a9ad87]/30 bg-[#a9ad87]/10 text-[#a9ad87]">
+                  <Sparkles size={22} />
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-white">Entire Wardrobe Drop Calibrated In Harmony</h4>
+                  <p className="mt-1 max-w-xl text-xs leading-relaxed text-white/60">
+                    Boxy drop-shoulder tees and heavyweight 480 GSM hoodies drape proportionally over our signature wide puddle hem jeans. Select your preferences to lock in priority access before the public launch.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={scrollToWaitlist}
+                className="inline-flex shrink-0 items-center justify-center rounded-full bg-paper px-6 py-3.5 text-xs font-bold text-ink transition hover:bg-[#b9bd98]"
+              >
+                Join Drop Waitlist <ArrowRight size={14} className="ml-2" />
+              </button>
+            </div>
           </div>
         </section>
 
         <section id="fit" className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
           <div className="grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
             <div>
-              <p className="eyebrow">03 — Fit & size</p>
+              <p className="eyebrow">04 — Fit & size</p>
               <h2 className="section-title mt-4">ROOM TO MOVE.<br /><span className="text-[#a9ad87]">FIT THAT MAKES SENSE.</span></h2>
               <p className="mt-5 max-w-md text-sm leading-7 text-white/60">The right oversized fit shouldn't mean guessing your size. We provide complete measurements including waist and total jeans length for the ideal stacked silhouette.</p>
 
@@ -732,7 +1201,10 @@ function App() {
                 <p className="text-sm leading-6 text-white/70">
                   We're not stopping at the first denim cut. The archive is expanding into a full oversized silhouette lineup: ultra-heavy fleece, double-knee workwear, and stone-washed grails.
                 </p>
-                <div className="mt-5 flex items-center gap-4 text-xs font-semibold text-[#a9ad87]">
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#a9ad87]/30 bg-[#a9ad87]/15 px-3.5 py-1 text-xs font-bold text-[#a9ad87]">
+                  <span>Future drops starting from ₹799</span>
+                </div>
+                <div className="mt-4 flex items-center gap-4 text-xs font-semibold text-[#a9ad87]">
                   <span className="flex items-center gap-1.5"><Clock size={15} /> Early Access Queue Active</span>
                   <span>•</span>
                   <span>Limited Factory Batches</span>
@@ -785,10 +1257,10 @@ function App() {
                     </div>
 
                     <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
-                      <span className="text-[11px] font-semibold text-white/50">Early access allocation</span>
+                      <span className="text-[11px] font-bold text-[#a9ad87]">{item.price || 'Starting from ₹799'}</span>
                       <button
                         onClick={scrollToWaitlist}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#a9ad87] transition group-hover:translate-x-1"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-white transition hover:text-[#a9ad87] group-hover:translate-x-1"
                       >
                         Join Queue <ArrowRight size={13} />
                       </button>
@@ -955,6 +1427,139 @@ function App() {
                     />
                   </button>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Product Detail & Inspection Modal */}
+      {inspectProduct && (
+        <div
+          onClick={closeInspect}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md transition-all duration-300"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-[#121614] shadow-2xl md:flex-row"
+          >
+            {/* Close button */}
+            <button
+              onClick={closeInspect}
+              aria-label="Close details"
+              className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white transition hover:bg-white hover:text-ink"
+            >
+              <X size={16} />
+            </button>
+
+            {/* Left Image View */}
+            <div className="relative aspect-[3/4] w-full md:w-1/2 overflow-hidden bg-black/50">
+              <img
+                src={inspectImage || inspectProduct.image}
+                alt={inspectProduct.name}
+                className="h-full w-full object-cover transition duration-300"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              
+              {/* Floating badges */}
+              <div className="absolute bottom-4 left-4 flex flex-wrap gap-1.5">
+                <span className="rounded-full border border-white/20 bg-black/85 px-3 py-1 text-[11px] font-black tracking-wider text-[#a9ad87] backdrop-blur-md">
+                  {inspectProduct.price}
+                </span>
+                <span className="rounded-full border border-white/15 bg-black/70 px-2.5 py-1 text-[10px] font-bold text-white/90 backdrop-blur-md">
+                  {inspectProduct.category === 'denim' ? inspectProduct.size : `Size: ${inspectProduct.size}`}
+                </span>
+                <span className="rounded-full bg-white/10 px-2.5 py-1 text-[9px] font-semibold text-white/80 backdrop-blur-md">
+                  {inspectProduct.silhouette}
+                </span>
+              </div>
+
+              {/* Gallery angle switcher */}
+              {inspectProduct.gallery && inspectProduct.gallery.length > 1 && (
+                <div className="absolute top-4 left-4 z-20 flex gap-2 rounded-xl border border-white/15 bg-black/75 p-1.5 backdrop-blur-md">
+                  {inspectProduct.gallery.map((img, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setInspectImage(img)}
+                      title={`View angle ${i + 1}`}
+                      className={`h-11 w-11 overflow-hidden rounded-lg border-2 transition ${
+                        (inspectImage || inspectProduct.image) === img
+                          ? 'border-[#a9ad87] ring-1 ring-[#a9ad87] scale-105'
+                          : 'border-white/20 opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <img src={img} alt="" className="h-full w-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Right Information & Craftsmanship */}
+            <div className="flex flex-1 flex-col justify-between overflow-y-auto p-6 sm:p-8">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[.24em] text-[#a9ad87]">
+                  {inspectProduct.categoryLabel} // {inspectProduct.badge}
+                </p>
+                <h3 className="mt-2 text-2xl font-black tracking-tight text-white sm:text-3xl">
+                  {inspectProduct.name}
+                </h3>
+                <div className="mt-3 flex flex-wrap items-center gap-2.5">
+                  <span className="text-2xl font-black text-[#a9ad87]">
+                    {inspectProduct.price}
+                  </span>
+                  <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-bold text-white">
+                    {inspectProduct.category === 'denim' ? inspectProduct.size : `Size: ${inspectProduct.size}`}
+                  </span>
+                </div>
+                <p className="mt-2 text-xs text-white/50">
+                  Cut: <strong className="text-white">{inspectProduct.silhouette}</strong>
+                </p>
+
+                <p className="mt-4 text-xs leading-6 text-white/70">
+                  {inspectProduct.description}
+                </p>
+
+                <div className="mt-6 border-t border-white/10 pt-5">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-white/85">
+                    Fabrication & Signature Specs
+                  </h4>
+                  <ul className="mt-3 grid gap-2.5">
+                    {inspectProduct.specs.map((spec, idx) => (
+                      <li key={idx} className="flex items-center gap-2.5 text-xs text-white/70">
+                        <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#a9ad87]/20 text-[#a9ad87]">
+                          <Check size={11} className="stroke-[3]" />
+                        </span>
+                        <span>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Modal Footer / Droplist CTA */}
+              <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-white/40">Price &amp; Availability</p>
+                  <p className="text-sm font-bold text-[#a9ad87]">{inspectProduct.price} • {inspectProduct.priceEstimate}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (inspectProduct.category === 'denim') {
+                      const idx = shades.findIndex((s) =>
+                        inspectProduct.name.toLowerCase().includes(s.name.toLowerCase().split(' ')[0])
+                      )
+                      if (idx !== -1) setSelectedShade(idx)
+                    }
+                    closeInspect()
+                    scrollToWaitlist()
+                  }}
+                  className="inline-flex items-center justify-center rounded-full bg-paper px-6 py-3 text-xs font-bold text-ink transition hover:bg-[#b9bd98]"
+                >
+                  Reserve This Fit <ArrowRight size={14} className="ml-2" />
+                </button>
               </div>
             </div>
           </div>

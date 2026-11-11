@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
 
 const AuthContext = createContext(null)
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
@@ -34,7 +35,7 @@ export function AuthProvider({ children }) {
 
   async function fetchMe() {
     try {
-      const res = await fetch('/api/auth/me', { credentials: 'include' })
+      const res = await fetch(`${API_BASE}/api/auth/me`, { credentials: 'include' })
       if (res.ok) {
         const data = await res.json()
         setUser(data)
@@ -58,12 +59,12 @@ export function AuthProvider({ children }) {
       pendingCallbackRef.current = onSuccess
     }
     // Server-side redirect flow — no client secrets exposed
-    window.location.href = '/api/auth/google'
+    window.location.href = `${API_BASE}/api/auth/google`
   }, [])
 
   const logout = useCallback(async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
+      await fetch(`${API_BASE}/api/auth/logout`, { method: 'POST', credentials: 'include' })
     } finally {
       setUser(null)
     }

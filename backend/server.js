@@ -18,10 +18,14 @@ dotenv.config({ path: path.join(process.cwd(), '.env') })
 const app = express()
 const PORT = process.env.PORT || 5050
 
+// Enable trust proxy for cloud deployment (Render & Vercel load balancers)
+app.set('trust proxy', 1)
+
 // ─── CORS ────────────────────────────────────────────────────────────────────
 const defaultAllowedOrigins = [
   'https://www.baggyhood.in',
   'https://baggyhood.in',
+  'https://baggyhood.onrender.com',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'http://localhost:5050',

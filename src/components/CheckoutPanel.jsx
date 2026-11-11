@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useCart } from '../context/CartContext.jsx'
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')
+
 const INDIAN_STATES = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
   'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka',
@@ -56,7 +58,7 @@ export default function CheckoutPanel({ items, totalAmount, onSuccess, onBack })
 
     try {
       // Step 1: Create Razorpay order on backend
-      const createRes = await fetch('/api/orders/create', {
+      const createRes = await fetch(`${API_BASE}/api/orders/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -143,7 +145,7 @@ export default function CheckoutPanel({ items, totalAmount, onSuccess, onBack })
         handler: async (response) => {
           try {
             // Step 3: Verify signature on backend
-            const verifyRes = await fetch('/api/orders/verify', {
+            const verifyRes = await fetch(`${API_BASE}/api/orders/verify`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               credentials: 'include',

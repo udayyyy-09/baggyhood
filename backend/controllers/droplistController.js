@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { sendLeadNotificationToAdmin, sendCustomerWelcomeEmail } from '../services/emailService.js'
+import { supabase } from '../services/supabaseClient.js'
 
 const DATA_DIR = path.join(process.cwd(), 'data')
 const JSON_FILE = path.join(DATA_DIR, 'droplist.json')
@@ -80,7 +81,23 @@ export async function handleJoinDroplist(req, res) {
     // 1. Immediately persist to disk backup
     persistLeadLocally(lead)
 
-    // 2. Dispatch async emails (Admin Alert + Customer Welcome Confirmation)
+    // 2. Persist to Supabase droplist_leads table
+    if (supabase) {
+      supabase
+        .from('droplist_leads')
+        .insert({
+          email: lead.email,
+          size: lead.size,
+          shade: lead.shade,
+        })
+        .then(({ error }) => {
+          if (error) console.error('⚠️ Supabase droplist_leads error:', error.message)
+          else console.log(`📋 Lead saved to Supabase: ${lead.email}`)
+        })
+        .catch((err) => console.warn('⚠️ Supabase droplist_leads exception:', err.message))
+    }
+
+    // 3. Dispatch async emails (Admin Alert + Customer Welcome Confirmation)
     Promise.allSettled([
       sendLeadNotificationToAdmin(lead),
       sendCustomerWelcomeEmail(lead),

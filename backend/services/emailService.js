@@ -205,3 +205,15 @@ export async function sendCustomerWelcomeEmail(lead) {
     purpose: `Customer VIP Welcome (${lead.email})`,
   })
 }
+
+/**
+ * 3. Send custom formatted HTML email (Collaborations, Outreach, Announcements)
+ */
+export async function sendCustomEmail({ to, subject, html, purpose }) {
+  return await dispatchEmail({
+    to,
+    subject,
+    html,
+    purpose: purpose || 'Custom Email',
+  })
+}

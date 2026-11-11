@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useAuth } from './context/AuthContext.jsx'
+import { useCart } from './context/CartContext.jsx'
+import AuthGateModal from './components/AuthGateModal.jsx'
+import CartDrawer from './components/CartDrawer.jsx'
+import AddToCartModal from './components/AddToCartModal.jsx'
 import {
   ArrowDownRight, ArrowRight, Check, Menu, ShieldCheck, Truck,
   Weight, Footprints, Ruler, Instagram, Youtube, MessageCircle, X,
@@ -10,7 +15,7 @@ const shades = [
   {
     name: 'Vintage Washed Grey',
     short: 'Washed Grey',
-    price: '₹1,350',
+    price: '₹1,450',
     length: '42″',
     tone: '#666866',
     image: '/Oversized Indigo Jeans and Chunky Boots.png',
@@ -57,7 +62,8 @@ const shades = [
   {
     name: 'Dark Brown',
     short: 'Dark Brown',
-    price: '₹1,350',
+    price: '₹1,550',
+    freeShipping: true,
     length: '42″',
     tone: '#4b3326',
     image: '/Baggy Black Denim Streetwear Look.png',
@@ -207,11 +213,11 @@ const collectionProducts = [
     name: 'Vintage Washed Grey Wide-Leg Jeans',
     tag: '14 OZ RIGID COTTON',
     badge: 'DROP #01 PRIORITY',
-    price: '₹1,350',
+    price: '₹1,450',
     size: 'Length: 42″',
     jeansLength: '42″',
     silhouette: 'Wide-Leg Sneaker Stack',
-    priceEstimate: 'Drop #01 — ₹1,350',
+    priceEstimate: 'Drop #01 — ₹1,450',
     image: '/vintage-washed-grey-front.png',
     gallery: [
       '/vintage-washed-grey-front.png',
@@ -234,11 +240,12 @@ const collectionProducts = [
     name: 'Dark Mocha Brown Wide-Leg Jeans',
     tag: '14 OZ VINTAGE WASH',
     badge: 'SIGNATURE COLORWAY',
-    price: '₹1,350',
+    price: '₹1,550',
+    freeShipping: true,
     size: 'Length: 42″',
     jeansLength: '42″',
     silhouette: 'Relaxed Wide Fit',
-    priceEstimate: 'Drop #01 — ₹1,350',
+    priceEstimate: 'Drop #01 — ₹1,550',
     image: '/dark-brown-front.png',
     gallery: [
       '/dark-brown-front.png',
@@ -246,6 +253,7 @@ const collectionProducts = [
       '/dark-brown-side.png',
     ],
     specs: [
+      '✦ Free Express Shipping',
       'Jeans length: 42″ (deep sneaker stack)',
       'Deep mocha wash with subtle vintage fade',
       'Heavy 14 oz cotton that holds its structure',
@@ -314,15 +322,17 @@ const collectionProducts = [
     name: 'Flying Birds Oversized Graphic Tee — Washed Black',
     tag: '280 GSM HEAVY COTTON',
     badge: 'NEW ARRIVAL',
-    price: '₹1099',
+    price: '₹1,299',
+    freeShipping: true,
     size: 'L',
     silhouette: 'Oversized Streetwear Fit',
-    priceEstimate: 'Drop #01 — ₹1,099',
+    priceEstimate: 'Drop #01 — ₹1,299',
     image: '/Oversized Black T-Shirt with Colourful Birds.png',
     gallery: [
       '/Oversized Black T-Shirt with Colourful Birds.png',
     ],
     specs: [
+      '✦ Free Express Shipping',
       'Size: L (Oversized relaxed drape)',
       'Vibrant painted swallows artwork across the back',
       'Substantial 280 GSM combed cotton',
@@ -339,6 +349,7 @@ const collectionProducts = [
     tag: 'TEXTURED WAFFLE KNIT',
     badge: 'DAILY ESSENTIAL',
     price: '₹899',
+    freeShipping: true,
     size: 'M',
     silhouette: 'Relaxed Casual Fit',
     priceEstimate: 'Drop #01 — ₹899',
@@ -347,6 +358,7 @@ const collectionProducts = [
       '/Dark Charcoal Henley on Wooden Hanger.png',
     ],
     specs: [
+      '✦ Free Express Shipping',
       'Size: M (Comfortable everyday fit)',
       'Textured waffle-knit cotton for breathable warmth',
       'Traditional 4-button front henley placket',
@@ -362,15 +374,17 @@ const collectionProducts = [
     name: 'Yokohama Varsity Athletic Jersey — Black & White',
     tag: 'VARSITY MESH KNIT',
     badge: 'LIMITED EDITION',
-    price: '₹1,199',
+    price: '₹1,299',
+    freeShipping: true,
     size: 'M',
     silhouette: 'Boxy Athletic Fit',
-    priceEstimate: 'Drop #01 — ₹1,199',
+    priceEstimate: 'Drop #01 — ₹1,299',
     image: '/Black Yokohama Varsity Jersey.png',
     gallery: [
       '/Black Yokohama Varsity Jersey.png',
     ],
     specs: [
+      '✦ Free Express Shipping',
       'Size: M (Athletic streetwear cut)',
       'Breathable poly-cotton athletic mesh knit',
       'Archival Yokohama lettering & Kanji script',
@@ -387,15 +401,17 @@ const collectionProducts = [
     name: 'ABRAX Minimalist Crewneck Sweatshirt — Sand Beige',
     tag: '460 GSM HEAVY FLEECE',
     badge: 'WARDROBE STAPLE',
-    price: '₹1,299',
+    price: '₹1,399',
+    freeShipping: true,
     size: 'M',
     silhouette: 'Drop-Shoulder Boxy Crew',
-    priceEstimate: 'Drop #01 — ₹1,299',
+    priceEstimate: 'Drop #01 — ₹1,399',
     image: '/Beige ABRAX Crewneck Sweatshirt Display.png',
     gallery: [
       '/Beige ABRAX Crewneck Sweatshirt Display.png',
     ],
     specs: [
+      '✦ Free Express Shipping',
       'Size: M (Boxy drop-shoulder fall)',
       'Heavyweight 460 GSM fleece with cozy brushed interior',
       'Minimal ABRAX woven label on the left chest',
@@ -407,6 +423,10 @@ const collectionProducts = [
 ]
 
 function App() {
+  const { isLoggedIn, login } = useAuth()
+  const { totalItems, openCart } = useCart()
+  const [authGateOpen, setAuthGateOpen] = useState(false)
+  const [addToCartProduct, setAddToCartProduct] = useState(null) // product being added
   const [selectedShade, setSelectedShade] = useState(0)
   const [productCategory, setProductCategory] = useState('all')
   const [inspectProduct, setInspectProduct] = useState(null)
@@ -536,6 +556,23 @@ function App() {
   const scrollToWardrobe = () => document.getElementById('wardrobe')?.scrollIntoView({ behavior: 'smooth' })
   const scrollToComingSoon = () => document.getElementById('coming-soon')?.scrollIntoView({ behavior: 'smooth' })
 
+  /**
+   * handleCheckoutContinue — called by the cart's "Continue" button.
+   * If logged in → runs proceedFn immediately.
+   * If not logged in → opens auth gate modal; proceedFn fires automatically after login.
+   * @param {Function} proceedFn - the purchasing pipeline to run after auth is confirmed
+   */
+  const handleCheckoutContinue = (proceedFn) => {
+    if (isLoggedIn) {
+      proceedFn()
+    } else {
+      setAuthGateOpen(true)
+      // AuthGateModal passes this as onSuccess to login()
+      // After Google OAuth redirect + return, AuthContext fires it automatically
+      login(proceedFn)
+    }
+  }
+
   const navItems = [
     { label: 'Home', href: '#home' },
     { label: 'The denim', href: '#denim' },
@@ -546,6 +583,7 @@ function App() {
   ]
 
   return (
+    <>
     <div className="min-h-screen overflow-hidden bg-ink text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/85 backdrop-blur-xl">
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 md:px-10">
@@ -560,8 +598,44 @@ function App() {
             <button onClick={scrollToWaitlist} className="rounded-full bg-paper px-5 py-2.5 text-xs font-bold text-ink transition hover:bg-olive hover:text-white inline-flex items-center">
               {submitted ? 'VIP Confirmed' : 'Join Drop #1'} <ArrowRight size={14} className="ml-2" />
             </button>
+            {/* Cart icon */}
+            <button
+              onClick={openCart}
+              className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-[#a9ad87]/60 hover:text-[#a9ad87]"
+              aria-label="Open cart"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+              {totalItems > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#a9ad87] text-[9px] font-black text-ink">
+                  {totalItems}
+                </span>
+              )}
+            </button>
           </div>
-          <button aria-label="Toggle menu" className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X /> : <Menu />}</button>
+          <div className="flex items-center gap-2 md:hidden">
+            {/* Mobile cart icon */}
+            <button
+              onClick={openCart}
+              className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70"
+              aria-label="Open cart"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+              {totalItems > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#a9ad87] text-[9px] font-black text-ink">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+            <button aria-label="Toggle menu" onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X /> : <Menu />}</button>
+          </div>
         </div>
         {mobileOpen && <div className="border-t border-white/10 bg-ink px-5 py-4 md:hidden">
           {navItems.map((item) => (
@@ -802,7 +876,7 @@ function App() {
                   <span className="text-[#a9ad87]">JEANS, TEES & SWEATSHIRTS.</span>
                 </h2>
                 <p className="mt-4 max-w-xl text-sm leading-6 text-white/60">
-                  Every silhouette in our rotation is custom milled with heavyweight substance: 14oz rigid puddle-stack denim (₹1,400), 280 GSM graphic tees (from ₹899), waffle henleys (₹899), and heavy fleece (₹1,299).
+                  Every silhouette in our rotation is custom milled with heavyweight substance: 14oz rigid puddle-stack denim (from ₹1,450), 280 GSM graphic tees (from ₹899), waffle henleys (₹899), and heavy fleece (₹1,399).
                 </p>
               </div>
 
@@ -925,18 +999,10 @@ function App() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => {
-                          if (product.category === 'denim') {
-                            const idx = shades.findIndex((s) =>
-                              product.name.toLowerCase().includes(s.name.toLowerCase().split(' ')[0])
-                            )
-                            if (idx !== -1) setSelectedShade(idx)
-                          }
-                          scrollToWaitlist()
-                        }}
+                        onClick={() => setAddToCartProduct(product)}
                         className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#a9ad87] hover:text-ink"
                       >
-                        Reserve Fit <ArrowRight size={12} />
+                        Add to Cart <ArrowRight size={12} />
                       </button>
                     </div>
                   </div>
@@ -1544,28 +1610,56 @@ function App() {
                   <p className="text-[10px] uppercase tracking-wider text-white/40">Price &amp; Availability</p>
                   <p className="text-sm font-bold text-[#a9ad87]">{inspectProduct.price} • {inspectProduct.priceEstimate}</p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (inspectProduct.category === 'denim') {
-                      const idx = shades.findIndex((s) =>
-                        inspectProduct.name.toLowerCase().includes(s.name.toLowerCase().split(' ')[0])
-                      )
-                      if (idx !== -1) setSelectedShade(idx)
-                    }
-                    closeInspect()
-                    scrollToWaitlist()
-                  }}
-                  className="inline-flex items-center justify-center rounded-full bg-paper px-6 py-3 text-xs font-bold text-ink transition hover:bg-[#b9bd98]"
-                >
-                  Reserve This Fit <ArrowRight size={14} className="ml-2" />
-                </button>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAddToCartProduct(inspectProduct)
+                    }}
+                    className="inline-flex items-center justify-center rounded-full bg-[#a9ad87] px-6 py-3 text-xs font-bold text-ink transition hover:bg-[#b9bd98]"
+                  >
+                    Add to Cart <ArrowRight size={14} className="ml-2" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (inspectProduct.category === 'denim') {
+                        const idx = shades.findIndex((s) =>
+                          inspectProduct.name.toLowerCase().includes(s.name.toLowerCase().split(' ')[0])
+                        )
+                        if (idx !== -1) setSelectedShade(idx)
+                      }
+                      closeInspect()
+                      scrollToWaitlist()
+                    }}
+                    className="inline-flex items-center justify-center rounded-full border border-white/20 bg-transparent px-5 py-3 text-xs font-bold text-white transition hover:border-white/50"
+                  >
+                    Join Waitlist
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
     </div>
+
+    {/* ── Auth Gate Modal — appears ONLY when user clicks Continue in cart without being signed in ── */}
+    <AuthGateModal
+      isOpen={authGateOpen}
+      onClose={() => setAuthGateOpen(false)}
+      onSuccess={() => setAuthGateOpen(false)}
+    />
+
+    {/* ── Cart Drawer (slides in from right) ── */}
+    <CartDrawer />
+
+    {/* ── Add to Cart size picker modal ── */}
+    <AddToCartModal
+      product={addToCartProduct}
+      onClose={() => setAddToCartProduct(null)}
+    />
+    </>
   )
 }
 
